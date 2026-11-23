@@ -1,0 +1,524 @@
+<!doctype html>
+<html lang="uk" data-bs-theme="auto">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Панель адміністратора інтернет-магазину «Зерно»" />
+    <meta name="author" content="Фастовець Нікіта" />
+    <title>Прибуток | Зерно – панель адміністратора</title>
+    <script src="js/color-modes.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/dashboard.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- іконки для перемикача теми -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="check2" viewBox="0 0 16 16">
+              <path
+                d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z"
+              ></path>
+            </symbol>
+      <symbol id="circle-half" viewBox="0 0 16 16">
+              <path
+                d="M8 15A7 7 0 1 0 8 1v14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z"
+              ></path>
+            </symbol>
+      <symbol id="moon-stars-fill" viewBox="0 0 16 16">
+              <path
+                d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z"
+              ></path>
+              <path
+                d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z"
+              ></path>
+            </symbol>
+      <symbol id="sun-fill" viewBox="0 0 16 16">
+              <path
+                d="M8 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM8 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 0zm0 13a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2A.5.5 0 0 1 8 13zm8-5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2a.5.5 0 0 1 .5.5zM3 8a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1h2A.5.5 0 0 1 3 8zm10.657-5.657a.5.5 0 0 1 0 .707l-1.414 1.415a.5.5 0 1 1-.707-.708l1.414-1.414a.5.5 0 0 1 .707 0zm-9.193 9.193a.5.5 0 0 1 0 .707L3.05 13.657a.5.5 0 0 1-.707-.707l1.414-1.414a.5.5 0 0 1 .707 0zm9.193 2.121a.5.5 0 0 1-.707 0l-1.414-1.414a.5.5 0 0 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .707zM4.464 4.465a.5.5 0 0 1-.707 0L2.343 3.05a.5.5 0 1 1 .707-.707l1.414 1.414a.5.5 0 0 1 0 .708z"
+              ></path>
+            </symbol>
+    </svg>
+    <!-- перемикач світлої / темної теми -->
+    <div
+      class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle"
+    >
+      <button
+        class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+        id="bd-theme"
+        type="button"
+        aria-expanded="false"
+        data-bs-toggle="dropdown"
+        aria-label="Тема (авто)"
+      >
+        <svg class="bi my-1 theme-icon-active" aria-hidden="true">
+          <use href="#circle-half"></use>
+        </svg>
+        <span class="visually-hidden" id="bd-theme-text">Тема</span>
+      </button>
+      <ul
+        class="dropdown-menu dropdown-menu-end shadow"
+        aria-labelledby="bd-theme-text"
+      >
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="light"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#sun-fill"></use>
+            </svg>
+            Світла
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center"
+            data-bs-theme-value="dark"
+            aria-pressed="false"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#moon-stars-fill"></use>
+            </svg>
+            Темна
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+        <li>
+          <button
+            type="button"
+            class="dropdown-item d-flex align-items-center active"
+            data-bs-theme-value="auto"
+            aria-pressed="true"
+          >
+            <svg class="bi me-2 opacity-50" aria-hidden="true">
+              <use href="#circle-half"></use>
+            </svg>
+            Авто
+            <svg class="bi ms-auto d-none" aria-hidden="true">
+              <use href="#check2"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+    </div>
+    <!-- іконки меню -->
+    <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
+      <symbol id="calendar3" viewBox="0 0 16 16">
+              <path
+                d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z"
+              ></path>
+              <path
+                d="M6.5 7a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-9 3a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"
+              ></path>
+            </symbol>
+      <symbol id="cart" viewBox="0 0 16 16">
+              <path
+                d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
+              ></path>
+            </symbol>
+      <symbol id="door-closed" viewBox="0 0 16 16">
+              <path
+                d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13h1.5a.5.5 0 0 1 0 1h-13a.5.5 0 0 1 0-1H3V2zm1 13h8V2H4v13z"
+              ></path>
+              <path d="M9 9a1 1 0 1 0 2 0 1 1 0 0 0-2 0z"></path>
+            </symbol>
+      <symbol id="gear-wide-connected" viewBox="0 0 16 16">
+              <path
+                d="M7.068.727c.243-.97 1.62-.97 1.864 0l.071.286a.96.96 0 0 0 1.622.434l.205-.211c.695-.719 1.888-.03 1.613.931l-.08.284a.96.96 0 0 0 1.187 1.187l.283-.081c.96-.275 1.65.918.931 1.613l-.211.205a.96.96 0 0 0 .434 1.622l.286.071c.97.243.97 1.62 0 1.864l-.286.071a.96.96 0 0 0-.434 1.622l.211.205c.719.695.03 1.888-.931 1.613l-.284-.08a.96.96 0 0 0-1.187 1.187l.081.283c.275.96-.918 1.65-1.613.931l-.205-.211a.96.96 0 0 0-1.622.434l-.071.286c-.243.97-1.62.97-1.864 0l-.071-.286a.96.96 0 0 0-1.622-.434l-.205.211c-.695.719-1.888.03-1.613-.931l.08-.284a.96.96 0 0 0-1.186-1.187l-.284.081c-.96.275-1.65-.918-.931-1.613l.211-.205a.96.96 0 0 0-.434-1.622l-.286-.071c-.97-.243-.97-1.62 0-1.864l.286-.071a.96.96 0 0 0 .434-1.622l-.211-.205c-.719-.695-.03-1.888.931-1.613l.284.08a.96.96 0 0 0 1.187-1.186l-.081-.284c-.275-.96.918-1.65 1.613-.931l.205.211a.96.96 0 0 0 1.622-.434l.071-.286zM12.973 8.5H8.25l-2.834 3.779A4.998 4.998 0 0 0 12.973 8.5zm0-1a4.998 4.998 0 0 0-7.557-3.779l2.834 3.78h4.723zM5.048 3.967c-.03.021-.058.043-.087.065l.087-.065zm-.431.355A4.984 4.984 0 0 0 3.002 8c0 1.455.622 2.765 1.615 3.678L7.375 8 4.617 4.322zm.344 7.646.087.065-.087-.065z"
+              ></path>
+            </symbol>
+      <symbol id="graph-up" viewBox="0 0 16 16">
+              <path
+                fill-rule="evenodd"
+                d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"
+              ></path>
+            </symbol>
+      <symbol id="list" viewBox="0 0 16 16">
+              <path
+                fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+              ></path>
+            </symbol>
+      <symbol id="search" viewBox="0 0 16 16">
+              <path
+                d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"
+              ></path>
+            </symbol>
+    </svg>
+    <header
+      class="navbar sticky-top bg-dark flex-md-nowrap p-0 shadow"
+      data-bs-theme="dark"
+    >
+      <a
+        class="navbar-brand col-md-3 col-lg-2 me-0 px-3 fs-6 text-white"
+        href="admin.html"
+        >Зерно – магазин кави та чаю</a
+      >
+      <ul class="navbar-nav flex-row d-md-none">
+        <li class="nav-item text-nowrap">
+          <button
+            class="nav-link px-3 text-white"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSearch"
+            aria-controls="navbarSearch"
+            aria-expanded="false"
+            aria-label="Пошук"
+          >
+            <svg class="bi" aria-hidden="true">
+              <use xlink:href="#search"></use>
+            </svg>
+          </button>
+        </li>
+        <li class="nav-item text-nowrap">
+          <button
+            class="nav-link px-3 text-white"
+            type="button"
+            data-bs-toggle="offcanvas"
+            data-bs-target="#sidebarMenu"
+            aria-controls="sidebarMenu"
+            aria-expanded="false"
+            aria-label="Меню"
+          >
+            <svg class="bi" aria-hidden="true">
+              <use xlink:href="#list"></use>
+            </svg>
+          </button>
+        </li>
+      </ul>
+      <div id="navbarSearch" class="navbar-search w-100 collapse">
+        <input
+          class="form-control w-100 rounded-0 border-0"
+          type="text"
+          placeholder="Пошук"
+          aria-label="Пошук"
+        />
+      </div>
+    </header>
+    <div class="container-fluid">
+      <div class="row">
+        <div
+          class="sidebar border border-right col-md-3 col-lg-2 p-0 bg-body-tertiary"
+        >
+          <div
+            class="offcanvas-md offcanvas-end bg-body-tertiary"
+            tabindex="-1"
+            id="sidebarMenu"
+            aria-labelledby="sidebarMenuLabel"
+          >
+            <div class="offcanvas-header">
+              <h5 class="offcanvas-title" id="sidebarMenuLabel">
+                Зерно
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="offcanvas"
+                data-bs-target="#sidebarMenu"
+                aria-label="Закрити"
+              ></button>
+            </div>
+            <div
+              class="offcanvas-body d-md-flex flex-column p-0 pt-lg-3 overflow-y-auto"
+            >
+              <ul class="nav flex-column">
+                <li class="nav-item">
+                  <a
+                    class="nav-link d-flex align-items-center gap-2"
+                    href="admin.html"
+                  >
+                    <svg class="bi" aria-hidden="true">
+                      <use xlink:href="#cart"></use>
+                    </svg>
+                    Товари
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link d-flex align-items-center gap-2 active"
+                    aria-current="page"
+                    href="profit.html"
+                  >
+                    <svg class="bi" aria-hidden="true">
+                      <use xlink:href="#graph-up"></use>
+                    </svg>
+                    Прибуток
+                  </a>
+                </li>
+              </ul>
+              <hr class="my-3" />
+              <ul class="nav flex-column mb-auto">
+                <li class="nav-item">
+                  <a
+                    class="nav-link d-flex align-items-center gap-2"
+                    href="#"
+                  >
+                    <svg class="bi" aria-hidden="true">
+                      <use xlink:href="#gear-wide-connected"></use>
+                    </svg>
+                    Налаштування
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a
+                    class="nav-link d-flex align-items-center gap-2"
+                    href="#"
+                  >
+                    <svg class="bi" aria-hidden="true">
+                      <use xlink:href="#door-closed"></use>
+                    </svg>
+                    Вихід
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <div
+            class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom"
+          >
+            <h1 class="h2">Прибуток</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group me-2">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Поділитися
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Експорт
+                </button>
+              </div>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary dropdown-toggle d-flex align-items-center gap-1"
+              >
+                <svg class="bi" aria-hidden="true">
+                  <use xlink:href="#calendar3"></use>
+                </svg>
+                Цей тиждень
+              </button>
+            </div>
+          </div>
+          <h2 class="h4">Виручка та прибуток за тиждень 16.11.2026 – 22.11.2026</h2>
+          <div class="table-responsive small">
+            <table class="table table-striped table-hover table-sm sales-table" id="salesTable">
+              <thead>
+                <tr>
+                  <th scope="col">Дата</th>
+                  <th scope="col">Товар</th>
+                  <th scope="col">Продано, штук</th>
+                  <th scope="col">Ціна одиниці, грн</th>
+                  <th scope="col">Прибуток одиниці, грн</th>
+                  <th scope="col">Виручка, грн</th>
+                  <th scope="col">Прибуток, грн</th>
+                </tr>
+              </thead>
+              <tbody class="table-group-divider">
+                <tr><th scope="row">16.11.2026</th><td>Кава Ефіопія</td><td>12</td><td>320</td><td>96</td><td>3840</td><td>1152</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Кава Колумбія</td><td>9</td><td>290</td><td>85</td><td>2610</td><td>765</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Кава Бразилія</td><td>4</td><td>780</td><td>210</td><td>3120</td><td>840</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Чай Сенча</td><td>7</td><td>210</td><td>70</td><td>1470</td><td>490</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Чай Ассам</td><td>8</td><td>180</td><td>60</td><td>1440</td><td>480</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Збір «Карпати»</td><td>5</td><td>150</td><td>55</td><td>750</td><td>275</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Френч-прес</td><td>2</td><td>450</td><td>130</td><td>900</td><td>260</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Турка мідна</td><td>1</td><td>520</td><td>160</td><td>520</td><td>160</td></tr>
+                <tr><th scope="row">16.11.2026</th><td>Чашка керамічна</td><td>4</td><td>220</td><td>80</td><td>880</td><td>320</td></tr>
+                <tr class="total-row"><th scope="row">16.11.2026</th><td>Разом за пн</td><td>52</td><td>–</td><td>–</td><td>15530</td><td>4742</td></tr>
+              </tbody>
+              <tbody class="table-group-divider">
+                <tr><th scope="row">17.11.2026</th><td>Кава Ефіопія</td><td>10</td><td>320</td><td>96</td><td>3200</td><td>960</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Кава Колумбія</td><td>11</td><td>290</td><td>85</td><td>3190</td><td>935</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Кава Бразилія</td><td>3</td><td>780</td><td>210</td><td>2340</td><td>630</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Чай Сенча</td><td>6</td><td>210</td><td>70</td><td>1260</td><td>420</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Чай Ассам</td><td>9</td><td>180</td><td>60</td><td>1620</td><td>540</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Збір «Карпати»</td><td>4</td><td>150</td><td>55</td><td>600</td><td>220</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Френч-прес</td><td>1</td><td>450</td><td>130</td><td>450</td><td>130</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Турка мідна</td><td>2</td><td>520</td><td>160</td><td>1040</td><td>320</td></tr>
+                <tr><th scope="row">17.11.2026</th><td>Чашка керамічна</td><td>3</td><td>220</td><td>80</td><td>660</td><td>240</td></tr>
+                <tr class="total-row"><th scope="row">17.11.2026</th><td>Разом за вт</td><td>49</td><td>–</td><td>–</td><td>14360</td><td>4395</td></tr>
+              </tbody>
+              <tbody class="table-group-divider">
+                <tr><th scope="row">18.11.2026</th><td>Кава Ефіопія</td><td>14</td><td>320</td><td>96</td><td>4480</td><td>1344</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Кава Колумбія</td><td>10</td><td>290</td><td>85</td><td>2900</td><td>850</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Кава Бразилія</td><td>5</td><td>780</td><td>210</td><td>3900</td><td>1050</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Чай Сенча</td><td>8</td><td>210</td><td>70</td><td>1680</td><td>560</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Чай Ассам</td><td>7</td><td>180</td><td>60</td><td>1260</td><td>420</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Збір «Карпати»</td><td>6</td><td>150</td><td>55</td><td>900</td><td>330</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Френч-прес</td><td>3</td><td>450</td><td>130</td><td>1350</td><td>390</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Турка мідна</td><td>1</td><td>520</td><td>160</td><td>520</td><td>160</td></tr>
+                <tr><th scope="row">18.11.2026</th><td>Чашка керамічна</td><td>5</td><td>220</td><td>80</td><td>1100</td><td>400</td></tr>
+                <tr class="total-row"><th scope="row">18.11.2026</th><td>Разом за ср</td><td>59</td><td>–</td><td>–</td><td>18090</td><td>5504</td></tr>
+              </tbody>
+              <tbody class="table-group-divider">
+                <tr><th scope="row">19.11.2026</th><td>Кава Ефіопія</td><td>11</td><td>320</td><td>96</td><td>3520</td><td>1056</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Кава Колумбія</td><td>12</td><td>290</td><td>85</td><td>3480</td><td>1020</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Кава Бразилія</td><td>4</td><td>780</td><td>210</td><td>3120</td><td>840</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Чай Сенча</td><td>9</td><td>210</td><td>70</td><td>1890</td><td>630</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Чай Ассам</td><td>10</td><td>180</td><td>60</td><td>1800</td><td>600</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Збір «Карпати»</td><td>5</td><td>150</td><td>55</td><td>750</td><td>275</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Френч-прес</td><td>2</td><td>450</td><td>130</td><td>900</td><td>260</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Турка мідна</td><td>2</td><td>520</td><td>160</td><td>1040</td><td>320</td></tr>
+                <tr><th scope="row">19.11.2026</th><td>Чашка керамічна</td><td>4</td><td>220</td><td>80</td><td>880</td><td>320</td></tr>
+                <tr class="total-row"><th scope="row">19.11.2026</th><td>Разом за чт</td><td>59</td><td>–</td><td>–</td><td>17380</td><td>5321</td></tr>
+              </tbody>
+              <tbody class="table-group-divider">
+                <tr><th scope="row">20.11.2026</th><td>Кава Ефіопія</td><td>16</td><td>320</td><td>96</td><td>5120</td><td>1536</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Кава Колумбія</td><td>14</td><td>290</td><td>85</td><td>4060</td><td>1190</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Кава Бразилія</td><td>6</td><td>780</td><td>210</td><td>4680</td><td>1260</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Чай Сенча</td><td>10</td><td>210</td><td>70</td><td>2100</td><td>700</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Чай Ассам</td><td>11</td><td>180</td><td>60</td><td>1980</td><td>660</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Збір «Карпати»</td><td>7</td><td>150</td><td>55</td><td>1050</td><td>385</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Френч-прес</td><td>4</td><td>450</td><td>130</td><td>1800</td><td>520</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Турка мідна</td><td>3</td><td>520</td><td>160</td><td>1560</td><td>480</td></tr>
+                <tr><th scope="row">20.11.2026</th><td>Чашка керамічна</td><td>6</td><td>220</td><td>80</td><td>1320</td><td>480</td></tr>
+                <tr class="total-row"><th scope="row">20.11.2026</th><td>Разом за пт</td><td>77</td><td>–</td><td>–</td><td>23670</td><td>7211</td></tr>
+              </tbody>
+              <tbody class="table-group-divider">
+                <tr><th scope="row">21.11.2026</th><td>Кава Ефіопія</td><td>21</td><td>320</td><td>96</td><td>6720</td><td>2016</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Кава Колумбія</td><td>17</td><td>290</td><td>85</td><td>4930</td><td>1445</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Кава Бразилія</td><td>8</td><td>780</td><td>210</td><td>6240</td><td>1680</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Чай Сенча</td><td>12</td><td>210</td><td>70</td><td>2520</td><td>840</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Чай Ассам</td><td>13</td><td>180</td><td>60</td><td>2340</td><td>780</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Збір «Карпати»</td><td>9</td><td>150</td><td>55</td><td>1350</td><td>495</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Френч-прес</td><td>5</td><td>450</td><td>130</td><td>2250</td><td>650</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Турка мідна</td><td>4</td><td>520</td><td>160</td><td>2080</td><td>640</td></tr>
+                <tr><th scope="row">21.11.2026</th><td>Чашка керамічна</td><td>8</td><td>220</td><td>80</td><td>1760</td><td>640</td></tr>
+                <tr class="total-row"><th scope="row">21.11.2026</th><td>Разом за сб</td><td>97</td><td>–</td><td>–</td><td>30190</td><td>9186</td></tr>
+              </tbody>
+              <tbody class="table-group-divider">
+                <tr><th scope="row">22.11.2026</th><td>Кава Ефіопія</td><td>18</td><td>320</td><td>96</td><td>5760</td><td>1728</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Кава Колумбія</td><td>15</td><td>290</td><td>85</td><td>4350</td><td>1275</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Кава Бразилія</td><td>7</td><td>780</td><td>210</td><td>5460</td><td>1470</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Чай Сенча</td><td>11</td><td>210</td><td>70</td><td>2310</td><td>770</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Чай Ассам</td><td>12</td><td>180</td><td>60</td><td>2160</td><td>720</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Збір «Карпати»</td><td>10</td><td>150</td><td>55</td><td>1500</td><td>550</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Френч-прес</td><td>3</td><td>450</td><td>130</td><td>1350</td><td>390</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Турка мідна</td><td>2</td><td>520</td><td>160</td><td>1040</td><td>320</td></tr>
+                <tr><th scope="row">22.11.2026</th><td>Чашка керамічна</td><td>7</td><td>220</td><td>80</td><td>1540</td><td>560</td></tr>
+                <tr class="total-row"><th scope="row">22.11.2026</th><td>Разом за нд</td><td>85</td><td>–</td><td>–</td><td>25470</td><td>7783</td></tr>
+              </tbody>
+              <tfoot>
+                <tr class="total-row">
+                  <th scope="row">Тиждень</th>
+                  <td>Разом за тиждень</td>
+                  <td>478</td>
+                  <td>–</td>
+                  <td>–</td>
+                  <td>144690</td>
+                  <td>44142</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
+          <h2 class="h4 mt-4">Виручка та прибуток по днях</h2>
+          <div class="row mb-5 line-row">
+            <div class="col-12 line-col">
+              <div class="chart-box line-chart" id="line_chart"></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      // кольори товарів (однакові для всіх діаграм)
+      const colors = ['#3366cc', '#dc3912', '#ff9900', '#109618', '#990099', '#0099c6', '#dd4477', '#66aa00', '#b82e2e'];
+
+      // кольори тексту залежно від теми
+      function themeText() {
+        const dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        return dark ? '#dee2e6' : '#212529';
+      }
+      function themeGrid() {
+        const dark = document.documentElement.getAttribute('data-bs-theme') === 'dark';
+        return dark ? '#495057' : '#dee2e6';
+      }
+
+      // дані беруться з таблиці, рядки "Разом" пропускаються
+      function readTable() {
+        const days = [];
+        const products = [];
+        const values = {};
+        const rows = document.querySelectorAll('#salesTable tbody tr:not(.total-row)');
+        rows.forEach(function (row) {
+          const cells = row.cells;
+          const day = cells[0].textContent.trim().substring(0, 5);
+          const product = cells[1].textContent.trim();
+          if (!days.includes(day)) days.push(day);
+          if (!products.includes(product)) products.push(product);
+          values[day + '|' + product] = {
+            qty: Number(cells[2].textContent),
+            revenue: cells.length > 5 ? Number(cells[5].textContent) : 0,
+            profit: cells.length > 6 ? Number(cells[6].textContent) : 0
+          };
+        });
+        return { days: days, products: products, values: values };
+      }
+
+      // форми точок для ліній прибутку
+      const shapes = ['circle', 'triangle', 'square', 'diamond', 'star', 'polygon', 'circle', 'triangle', 'square'];
+
+      google.charts.load('current', { packages: ['corechart'], language: 'uk' });
+      google.charts.setOnLoadCallback(drawCharts);
+
+      function drawCharts() {
+        const t = readTable();
+        const text = themeText();
+
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'Дата');
+        t.products.forEach(function (p) {
+          data.addColumn('number', p + ' - виручка, грн');
+          data.addColumn('number', p + ' - прибуток, грн');
+        });
+        t.days.forEach(function (day) {
+          const row = [day];
+          t.products.forEach(function (p) {
+            row.push(t.values[day + '|' + p].revenue);
+            row.push(t.values[day + '|' + p].profit);
+          });
+          data.addRow(row);
+        });
+
+        // для кожного товару дві лінії одного кольору:
+        // виручка - пунктир [5, 3], прибуток - суцільна з точками
+        const series = {};
+        t.products.forEach(function (p, i) {
+          series[2 * i] = { color: colors[i], lineDashStyle: [5, 3], pointSize: 0 };
+          series[2 * i + 1] = { color: colors[i], pointSize: 7, pointShape: shapes[i] };
+        });
+
+        const options = {
+          title: 'Виручка та прибуток по товарах за тиждень 16.11 – 22.11.2026',
+          titleTextStyle: { color: text, fontSize: 14 },
+          backgroundColor: 'transparent',
+          series: series,
+          lineWidth: 2,
+          legend: { position: 'right', textStyle: { color: text, fontSize: 11 } },
+          hAxis: { title: 'Дата', textStyle: { color: text }, titleTextStyle: { color: text } },
+          vAxis: { title: 'Сума, грн', textStyle: { color: text }, titleTextStyle: { color: text }, gridlines: { color: themeGrid() } },
+          chartArea: { left: 80, top: 50, width: '62%', height: '80%' },
+          height: 620
+        };
+
+        new google.visualization.LineChart(document.getElementById('line_chart')).draw(data, options);
+      }
+
+      // перемальовуємо графік при зміні розміру вікна і теми
+      window.addEventListener('resize', drawCharts);
+      new MutationObserver(drawCharts).observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['data-bs-theme']
+      });
+    </script>
+  </body>
+</html>
